@@ -401,9 +401,10 @@ static unique_ptr<BaseSecret> CreateAWSSecretFromCredentialChain(ClientContext &
 			Aws::Auth::ProfileConfigFileAWSCredentialsProvider provider(profile.c_str());
 			credentials = provider.GetAWSCredentials();
 		} else {
-			auto config = Aws::MakeShared<Aws::Client::ClientConfiguration::CredentialProviderConfiguration>();
+
+			Aws::Client::ClientConfiguration::CredentialProviderConfiguration config;
 			if (!SELECTED_CURL_CERT_PATH.empty()) {
-				config->caFile = SELECTED_CURL_CERT_PATH;
+				config.caFile = SELECTED_CURL_CERT_PATH;
 			}
 			Aws::Auth::DefaultAWSCredentialsProviderChain provider(config);
 			credentials = provider.GetAWSCredentials();
