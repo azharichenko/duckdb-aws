@@ -401,7 +401,7 @@ static unique_ptr<BaseSecret> CreateAWSSecretFromCredentialChain(ClientContext &
 			Aws::Auth::ProfileConfigFileAWSCredentialsProvider provider(profile.c_str());
 			credentials = provider.GetAWSCredentials();
 		} else {
-			auto config = Aws::MakeShared<Aws::Client::ClientConfiguration>("DuckDBAws");
+			auto config = Aws::MakeShared<Aws::Client::ClientConfiguration::CredentialProviderConfiguration>();
 			if (!SELECTED_CURL_CERT_PATH.empty()) {
 				config->caFile = SELECTED_CURL_CERT_PATH;
 			}
